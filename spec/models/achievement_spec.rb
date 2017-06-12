@@ -7,42 +7,13 @@ RSpec.describe Achievement, type: :model do
   # Validations
   describe 'validations' do
 
-    it 'requires titles' do
-      achievement = Achievement.new(title: '')
-      expect(achievement.valid?).to be_falsy
-    end
+    it { should validate_presence_of(:title) }
 
-    it 'requires title to be unique for one user' do
-      user = FactoryGirl.create(:user)
-      first_achievement = FactoryGirl.create(
-        :private_achievement,
-        title: 'First Achievement',
-        user: user
-      )
-      new_achievement = Achievement.new(
-        title: 'First Achievement',
-        user: user
-      )
+    it { should validate_uniqueness_of(:title).scoped_to(:user_id).with_message('You can\'t have two achievements with the same title')}
 
-      expect(new_achievement.valid?).to be_falsy
-    end
+    it { should validate_presence_of(:user) }
 
-    it 'allows different users to have achievements with identical titles' do
-      user1 = FactoryGirl.create(:user)
-      user2 = FactoryGirl.create(:user)
-      first_achievement = FactoryGirl.create(
-        :public_achievement,
-        title: 'First Achievement',
-        user: user1
-      )
-      new_achievement = FactoryGirl.create(
-        :public_achievement,
-        title: 'First Achievement',
-        user: user2
-      )
-
-      expect(new_achievement.valid?).to be_truthy
-    end
+    it { should belong_to(:user) }
 
   end
 
