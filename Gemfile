@@ -22,6 +22,7 @@ gem 'redcarpet'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'spring-commands-rspec'
   gem 'spring-commands-cucumber'
   gem 'factory_girl_rails'

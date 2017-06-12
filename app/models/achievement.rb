@@ -8,4 +8,8 @@ class Achievement < ApplicationRecord
 
   validates :title, presence: true
 
+  def description_html
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(description)
+  end
+
 end
