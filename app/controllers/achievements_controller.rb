@@ -8,6 +8,12 @@ class AchievementsController < ApplicationController
     :destroy
   ]
 
+  before_action :owner_only, only: [
+    :edit,
+    :update,
+    :destroy
+  ]
+
   #
   #
   # Index
@@ -38,14 +44,12 @@ class AchievementsController < ApplicationController
   #
   # Edit
   def edit
-    @achievement = Achievement.find(params[:id])
   end
 
   #
   #
   # Update
   def update
-    @achievement = Achievement.find(params[:id])
     if @achievement.update_attributes(achievement_params)
       redirect_to achievement_path(@achievement)
     else
@@ -65,7 +69,7 @@ class AchievementsController < ApplicationController
   #
   # Destroy
   def destroy
-    Achievement.destroy(params[:id])
+    @achievement.destroy
     redirect_to achievements_path
   end
 
@@ -83,6 +87,13 @@ class AchievementsController < ApplicationController
             :cover_image,
             :featured
           )
+  end
+
+  def owner_only
+    @achievement = Achievement.find(params[:id])
+    if current_user != @achievement.user
+      redirect_to achievements_path
+    end
   end
 
 end

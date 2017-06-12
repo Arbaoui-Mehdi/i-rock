@@ -1,5 +1,7 @@
 class Achievement < ApplicationRecord
 
+  belongs_to :user, optional: true
+
   enum privacy: [
     :public_access,
     :private_access,
