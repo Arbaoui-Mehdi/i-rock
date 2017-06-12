@@ -23,7 +23,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
+  gem 'spring-commands-cucumber'
   gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
   gem 'awesome_print'
 end
 
@@ -36,7 +38,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'guard-rspec', require: false
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
