@@ -16,12 +16,14 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_girl_rails'
+  gem 'awesome_print'
 end
 
 group :development do
@@ -33,6 +35,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'guard-rspec', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
