@@ -4,6 +4,47 @@ describe AchievementsController do
 
   #
   #
+  # Index
+  describe 'GET index' do
+
+    it 'render :index template' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+
+    it 'assigns only public achievements to template' do
+      public_achievement = FactoryGirl.create(:public_achievement)
+      get :index
+      expect(assigns(:achievements)).to match_array(public_achievement)
+    end
+
+  end
+
+  #
+  #
+  # Edit
+  describe 'GET edit' do
+
+    let(:achievement) { FactoryGirl.create(:public_achievement) }
+
+    it 'render :edit template' do
+      get :edit, params: {
+        id: achievement
+      }
+      expect(response).to render_template(:edit)
+    end
+
+    it 'assigns the requested achievement to template' do
+      get :edit, params: {
+        id: achievement
+      }
+      expect(assigns(:achievement)).to eq(achievement)
+    end
+
+  end
+
+  #
+  #
   # New
   describe 'GET new' do
 

@@ -1,9 +1,22 @@
 class AchievementsController < ApplicationController
 
+  #
+  #
+  # Index
+  def index
+    @achievements = Achievement.public_access
+  end
+
+  #
+  #
+  # New
   def new
     @achievement = Achievement.new
   end
 
+  #
+  #
+  # Create
   def create
     @achievement = Achievement.new(achievement_params)
     if @achievement.save
@@ -13,10 +26,23 @@ class AchievementsController < ApplicationController
     end
   end
 
+  #
+  #
+  # Edit
+  def edit
+    @achievement = Achievement.find(params[:id])
+  end
+
+  #
+  #
+  # Show
   def show
     @achievement = Achievement.find(params[:id])
   end
 
+  #
+  #
+  # Private
   private
 
   def achievement_params
