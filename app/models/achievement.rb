@@ -25,4 +25,10 @@ class Achievement < ApplicationRecord
     "#{title} by #{user.email}"
   end
 
+  def self.by_letter(letter)
+    includes(:user)
+      .where('title LIKE ?', "#{letter}%")
+      .order('users.email')
+  end
+
 end
